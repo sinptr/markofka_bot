@@ -56,6 +56,7 @@ setInterval(function() {
   const curTime = moment().utcOffset(utcOffset);
   if (curTime.hours() > 10 && curTime.hours() < 22) {
     users.forEach((user, chatId) => {
+      bot.sendMessage(chatId, 'Working');
       if (curTime.format('H:mm') === user.time) {
         bot.sendSticker(chatId, topSticker.file_id)
             .catch(console.log);
@@ -67,4 +68,4 @@ setInterval(function() {
       }
     })
   }
-},60000);
+},10000);
