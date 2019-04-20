@@ -52,7 +52,7 @@ bot.onText(/\/stop/, msg => {
 
 setInterval(function() {
   const curTime = moment().utcOffset(utcOffset);
-  if (curTime.hours() > 10 && curTime.hours() < 21) {
+  if (curTime.hours() > 10 && curTime.hours() < 22) {
     users.forEach((user, chatId) => {
       if (curTime.format('H:mm') === user.time) {
         bot.sendSticker(chatId, topSticker.file_id)
