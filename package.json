@@ -19,5 +19,8 @@
   "devDependencies": {
     "nodemon": "^1.18.11",
     "socks5-https-client": "^1.2.1"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
