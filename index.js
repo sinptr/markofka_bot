@@ -7,7 +7,7 @@ let stickers = [];
 let topSticker = {};
 const users = new Map();
 const utcOffset = 180; // Europe/Moscow
-const options = { polling: true };
+const options = {};
 
 if (String(process.env.NODE_ENV).trim() === 'develop') {
   const Agent = require('socks5-https-client/lib/Agent');
@@ -18,6 +18,12 @@ if (String(process.env.NODE_ENV).trim() === 'develop') {
       socksPort: Number(process.env.SOCKS5_PORT),
     }
   };
+  options.polling = true;
+} else {
+  options.webHook = {
+    port: process.env.PORT || 8443,
+    host: '0.0.0.0'
+  }
 }
 
 const bot = new TelegramBot(token, options);
