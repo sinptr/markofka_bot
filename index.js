@@ -27,6 +27,11 @@ if (String(process.env.NODE_ENV).trim() === 'develop') {
 }
 
 const bot = new TelegramBot(token, options);
+const url = process.env.APP_URL || 'https://infinite-cove-90655.herokuapp.com:443';
+
+// This informs the Telegram servers of the new webhook.
+// Note: we do not need to pass in the cert, as it already provided
+bot.setWebHook(`${url}/bot${token}`);
 
 const getStickers = async (...args) => {
   const promises = args.map(setName => bot.getStickerSet(setName));
