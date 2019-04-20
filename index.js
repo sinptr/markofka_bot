@@ -22,15 +22,12 @@ if (String(process.env.NODE_ENV).trim() === 'develop') {
 } else {
   options.webHook = {
     port: process.env.PORT || 8443,
-    host: '0.0.0.0'
   }
 }
 
 const bot = new TelegramBot(token, options);
-const url = process.env.APP_URL || 'https://infinite-cove-90655.herokuapp.com:443';
+const url = process.env.APP_URL;
 
-// This informs the Telegram servers of the new webhook.
-// Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${url}/bot${token}`);
 
 const getStickers = async (...args) => {
@@ -65,9 +62,8 @@ bot.onText(/\/stop/, msg => {
 
 setInterval(function() {
   const curTime = moment().utcOffset(utcOffset);
-  if (curTime.hours() > 10 && curTime.hours() < 23) {
+  if (curTime.hours() >= 10 && curTime.hours() <= 21) {
     users.forEach((user, chatId) => {
-      bot.sendMessage(chatId, 'Working');
       if (curTime.format('H:mm') === user.time) {
         bot.sendSticker(chatId, topSticker.file_id)
             .catch(console.log);
@@ -79,4 +75,4 @@ setInterval(function() {
       }
     })
   }
-},10000);
+},60000);
