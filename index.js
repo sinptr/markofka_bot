@@ -65,7 +65,7 @@ bot.onText(/\/stop/, msg => {
 
 setInterval(function() {
   const curTime = moment().utcOffset(utcOffset);
-  if (curTime.hours() > 10 && curTime.hours() < 22) {
+  if (curTime.hours() > 10 && curTime.hours() < 23) {
     users.forEach((user, chatId) => {
       bot.sendMessage(chatId, 'Working');
       if (curTime.format('H:mm') === user.time) {
