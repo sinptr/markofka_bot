@@ -43,6 +43,8 @@ bot.onText(/\/start/, (msg) => {
       time: '13:39',
       lastMsgTime: moment().utcOffset(utcOffset).add( -2, 'hours'),
     });
+    bot.sendMessage(chatId, 'Привет, я Марковка Бот, буду слать тебе каждый час топ стикеры.')
+        .catch(console.log)
   }
 });
 
